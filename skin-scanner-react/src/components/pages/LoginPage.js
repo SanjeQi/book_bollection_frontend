@@ -8,7 +8,7 @@ class LoginPage extends React.Component {
   submit = data => {
     //history is provided by router
     //login will be available after I connect to redux
-    this.props.login(data).then(() => this.props.history.push("/"));
+    return this.props.login(data).then(() => this.props.history.push("/"));
   };
 
   render() {
