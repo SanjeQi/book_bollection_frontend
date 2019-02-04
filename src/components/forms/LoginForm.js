@@ -1,6 +1,6 @@
 import React from "react";
-import { Button, Form, Message } from "semantic-ui-react";
 import PropTypes from "prop-types";
+import { Form, Button, Message } from "semantic-ui-react";
 import Validator from "validator";
 import InlineError from "../messages/InlineError";
 
@@ -20,11 +20,8 @@ class LoginForm extends React.Component {
     });
 
   onSubmit = () => {
-    //validate data
     const errors = this.validate(this.state.data);
     this.setState({ errors });
-    //pass it to submit function
-    //handle errors
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
       this.props
@@ -44,6 +41,7 @@ class LoginForm extends React.Component {
 
   render() {
     const { data, errors, loading } = this.state;
+
     return (
       <Form onSubmit={this.onSubmit} loading={loading}>
         {errors.global && (
@@ -53,24 +51,24 @@ class LoginForm extends React.Component {
           </Message>
         )}
         <Form.Field error={!!errors.email}>
-          <label htmlFor="email">Email: </label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
-            placeholder="...email..."
             name="email"
+            placeholder="example@example.com"
             value={data.email}
             onChange={this.onChange}
           />
           {errors.email && <InlineError text={errors.email} />}
         </Form.Field>
         <Form.Field error={!!errors.password}>
-          <label htmlFor="password">Password: </label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
-            placeholder="...password..."
             name="password"
+            placeholder="Make it secure"
             value={data.password}
             onChange={this.onChange}
           />
