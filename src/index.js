@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import App from "./App";
+import decode from "jwt-decode";
 // import registerServiceWorker from "./registerServiceWorker";
 import rootReducer from "./rootReducer";
 import { userLoggedIn } from "./actions/auth";
@@ -17,7 +18,12 @@ const store = createStore(
 );
 
 if (localStorage.skinscanJWT) {
-  const user = { token: localStorage.skinscanJWT };
+  const payload = decode(localStorage.skinscanJWT);
+  const user = {
+    token: localStorage.skinscanJWT,
+    email: payload.email,
+    confirmed: payload.confirmed
+  };
   store.dispatch(userLoggedIn(user));
 }
 
