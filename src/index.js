@@ -11,6 +11,7 @@ import decode from "jwt-decode";
 // import registerServiceWorker from "./registerServiceWorker";
 import rootReducer from "./rootReducer";
 import { userLoggedIn } from "./actions/auth";
+import setAuthorizationHeader from "./utils/setAuthorizationHeader";
 
 const store = createStore(
   rootReducer,
@@ -24,6 +25,7 @@ if (localStorage.skinscanJWT) {
     email: payload.email,
     confirmed: payload.confirmed
   };
+  setAuthorizationHeader(localStorage.skinscanJWT);
   store.dispatch(userLoggedIn(user));
 }
 
